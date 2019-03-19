@@ -1,8 +1,60 @@
+import 'semantic-ui-css/semantic.min.css';
+
 import React from "react";
 import ReactDOM from "react-dom";
 
-const Index = () => {
-  return <div>Hello React!</div>;
-};
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware, compose } from "redux";
+import { createEpicMiddleware } from "redux-observable";
+import logger from 'redux-logger';
 
-ReactDOM.render(<Index />, document.getElementById("index"));
+import epics from "./epics";
+import reducers from "./reducer";
+
+
+import InputContainer from './container/input';
+import WelcomeContainer from './container/welcome';
+
+
+class Index extends React.Component {
+    constructor() {
+        super();
+    }
+    componentWillMount(){
+    }
+    componentWillUnmount() {
+    }
+
+    render() {
+        return (
+        <div>
+            <InputContainer/>
+            <WelcomeContainer/>
+        </div>)
+    }
+}
+
+
+const epicMiddleware = createEpicMiddleware();
+
+const middlewares = [
+    logger,
+    epicMiddleware,
+];
+
+const enhancer = compose(
+    applyMiddleware(...middlewares)
+);
+
+const initalState = {};
+
+const store = createStore(reducers, initalState, enhancer);
+
+epicMiddleware.run(epics);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <Index />
+  </Provider>,
+  document.getElementById("index")
+);

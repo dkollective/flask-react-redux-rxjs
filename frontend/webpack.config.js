@@ -19,7 +19,7 @@ module.exports = {
 
     resolve: {
       // Add ".ts" and ".tsx" as resolvable extensions.
-      extensions: [".ts", ".tsx", ".js", ".json"]
+      extensions: [".ts", ".tsx", ".js", ".json", ".jsx"]
     },
 
     plugins: [htmlPlugin],
@@ -36,7 +36,26 @@ module.exports = {
               presets: ["@babel/preset-env", "@babel/preset-react"]
             }
           }
-        }
+        },
+        {
+          test: /\.css$/,
+          use: ["style-loader", "css-loader"]
+        },
+        {
+            test: /\.(woff|woff2|eot|ttf|svg|gif)$/,
+            loader: 'url-loader?limit=1000000'
+        },
+        {
+            test: /\.(jpeg|png|jpg)$/,
+            use: [
+                {
+                    loader: 'file-loader',
+                    options: {
+                        name: '[path][name].[ext]',
+                    }
+                }
+            ]
+        },
       ]
     },
 
