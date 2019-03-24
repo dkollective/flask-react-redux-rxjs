@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import * as a from '../actions';
 
 const WelcomeComponent = ({name}) => (
-    <div>Hello {name}!</div>
+    <div id='welcome-message'>Hello {name}!</div>
 )
 
 const WelcomeContainer = connect(

@@ -14,6 +14,7 @@ import reducers from "./reducer";
 
 import InputContainer from './container/input';
 import WelcomeContainer from './container/welcome';
+import ErrorsContainer from './container/error';
 
 
 class Index extends React.Component {
@@ -28,6 +29,7 @@ class Index extends React.Component {
     render() {
         return (
         <div>
+            <ErrorsContainer/>
             <InputContainer/>
             <WelcomeContainer/>
         </div>)

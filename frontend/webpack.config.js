@@ -1,9 +1,17 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const htmlPlugin = new HtmlWebPackPlugin({
   template: "./src/index.html",
   filename: "./index.html"
 });
+
+
+const copyConfig = new CopyWebpackPlugin([{
+  from: './src/production.js',
+  to: './config.js',
+  toType: 'file'
+}])
 
 
 module.exports = {
@@ -22,7 +30,7 @@ module.exports = {
       extensions: [".ts", ".tsx", ".js", ".json", ".jsx"]
     },
 
-    plugins: [htmlPlugin],
+    plugins: [htmlPlugin, copyConfig],
 
     module: {
       rules: [

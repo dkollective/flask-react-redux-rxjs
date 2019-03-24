@@ -5,6 +5,7 @@ import * as a from '../actions';
 
 const InputNameComponent = ({onChange}) => (
     <Input
+        id='input-name'
         placeholder='Enter Name'
         onChange={onChange}
     />

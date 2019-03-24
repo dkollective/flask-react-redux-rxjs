@@ -11,3 +11,18 @@ export const inputName = (name) => {
     name
   };
 }
+
+export const error = (message, trace) => {
+  return {
+    type: 'ERROR',
+    message,
+    trace
+  };
+}
+
+
+export const acknowledgeError = () => {
+  return {
+    type: 'ERROR_ACKNOWLEDGED'
+  };
+}

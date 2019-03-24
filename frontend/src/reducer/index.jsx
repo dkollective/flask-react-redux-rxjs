@@ -10,8 +10,21 @@ const nameReducer = (loader = 'unkown', action) => {
     }
 }
 
+const errorReducer = (loader = [], action) => {
+    switch (action.type) {
+        case 'ERROR_ACKNOWLEDGED':
+            return []
+        case 'ERROR':
+            return [{message: action.message, trace: action.trace}]
+        default:
+            return loader;
+    }
+}
+
+
 const reducers = combineReducers({
-    name: nameReducer
+    name: nameReducer,
+    errors: errorReducer
 });
 
 export default reducers;
